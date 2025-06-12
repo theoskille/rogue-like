@@ -50,7 +50,7 @@ rogue-like/
 │   │   │   ├── CombatSystem.cpp/.h    # Combat orchestration and rules
 │   │   │   ├── Battlefield.cpp/.h     # 8-tile strip, positioning logic
 │   │   │   ├── TurnManager.cpp/.h     # Speed-based turn order system
-│   │   │   └── Move.cpp/.h            # Individual attack/ability definitions
+│   │   │   └── Action.cpp/.h          # Individual attack/ability definitions
 │   │   ├── dungeon/           # Dungeon generation and exploration
 │   │   │   ├── DungeonGenerator.cpp/.h # Random graph-based room generation
 │   │   │   ├── Room.cpp/.h            # Individual room data and connections
@@ -73,9 +73,9 @@ rogue-like/
 │       ├── DataLoader.cpp/.h          # JSON parsing and data loading
 │       └── schemas/           # JSON definitions for game content
 │           ├── items.json             # Equipment stats and properties
-│           ├── enemies.json           # Enemy stats, moves, AI types
-│           ├── moves.json             # Attack definitions and effects
-│           ├── classes.json           # Class movesets and unlock conditions
+│           ├── enemies.json           # Enemy stats, actions, AI types
+│           ├── actions.json           # Attack definitions and effects
+│           ├── classes.json           # Class action sets and unlock conditions
 │           └── encounters.json        # Encounter types and generation rules
 ├── assets/                    # Game resources (loaded at runtime)
 │   ├── textures/              # Sprite images, UI graphics
@@ -212,7 +212,7 @@ private:
     
 public:
     void StartCombat(Entity* player, Entity* enemy);
-    void ProcessTurn(const Move& move);
+    void ProcessTurn(const Action& action);
     bool IsCombatOver() const;
 };
 ```
@@ -308,7 +308,7 @@ private:
     
 public:
     std::unique_ptr<Entity> CreateEntity(const std::string& type);
-    std::unique_ptr<Move> CreateMove(const std::string& moveId);
+    std::unique_ptr<Action> CreateAction(const std::string& actionId);
 };
 ```
 
@@ -331,14 +331,14 @@ private:
 class AIStrategy {
 public:
     virtual ~AIStrategy() = default;
-    virtual Move SelectMove(const Entity& self, const Entity& target, 
-                           const Battlefield& battlefield) = 0;
+    virtual Action SelectAction(const Entity& self, const Entity& target, 
+                             const Battlefield& battlefield) = 0;
 };
 
 class AggressiveAI : public AIStrategy {
 public:
-    Move SelectMove(const Entity& self, const Entity& target, 
-                   const Battlefield& battlefield) override;
+    Action SelectAction(const Entity& self, const Entity& target, 
+                      const Battlefield& battlefield) override;
 };
 ```
 
@@ -370,7 +370,7 @@ public:
 
 ## Extension Points
 
-- **New Moves**: Add JSON entry, no code changes needed
+- **New Actions**: Add JSON entry, no code changes needed
 - **New Enemies**: Define in JSON, automatic loading
 - **New States**: Inherit from GameState, register with StateManager
 - **New Events**: Add to EventType enum, publish/subscribe as needed

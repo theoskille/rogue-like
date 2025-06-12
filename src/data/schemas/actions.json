@@ -1,0 +1,184 @@
+{
+    "slash": {
+        "name": "Slash",
+        "type": "ATTACK",
+        "description": "A basic sword attack with good accuracy",
+        "accuracy": 95,
+        "damage": 5,
+        "range": 1,
+        "cooldown": 0,
+        "properties": {
+            "is_physical": 1
+        }
+    },
+    "fireball": {
+        "name": "Fireball",
+        "type": "ATTACK",
+        "description": "A magical attack that deals fire damage",
+        "accuracy": 85,
+        "damage": 8,
+        "range": 2,
+        "cooldown": 1,
+        "properties": {
+            "is_physical": 0
+        }
+    },
+    "heal": {
+        "name": "Heal",
+        "type": "HEAL",
+        "description": "Restores health to the target",
+        "accuracy": 100,
+        "damage": 10,
+        "range": 1,
+        "cooldown": 2,
+        "properties": {
+            "self_only": 1
+        }
+    },
+    "strength_buff": {
+        "name": "Strengthen",
+        "type": "BUFF",
+        "description": "Increases strength for a few turns",
+        "accuracy": 100,
+        "damage": 0,
+        "range": 1,
+        "cooldown": 3,
+        "properties": {
+            "mod_STRENGTH": 3,
+            "duration": 3,
+            "self_only": 1
+        }
+    },
+    "weaken": {
+        "name": "Weaken",
+        "type": "DEBUFF",
+        "description": "Reduces the target's strength",
+        "accuracy": 80,
+        "damage": 0,
+        "range": 1,
+        "cooldown": 2,
+        "properties": {
+            "mod_STRENGTH": -2,
+            "duration": 2
+        }
+    },
+    "advance": {
+        "name": "Advance",
+        "type": "MOVEMENT",
+        "description": "Move one tile forward toward the enemy side. Can move to any unoccupied tile.",
+        "accuracy": 100,
+        "damage": 0,
+        "range": 0,
+        "cooldown": 0,
+        "properties": {
+            "position_change": 1,
+            "self_only": 1
+        }
+    },
+    "retreat": {
+        "name": "Retreat",
+        "type": "MOVEMENT",
+        "description": "Move one tile backward toward your side. Can move to any unoccupied tile.",
+        "accuracy": 100,
+        "damage": 0,
+        "range": 0,
+        "cooldown": 0,
+        "properties": {
+            "position_change": -1,
+            "self_only": 1
+        }
+    },
+    "push": {
+        "name": "Push",
+        "type": "MOVEMENT",
+        "description": "Push the target one tile away",
+        "accuracy": 90,
+        "damage": 2,
+        "range": 1,
+        "cooldown": 1,
+        "properties": {
+            "position_change": 1,
+            "is_physical": 1
+        }
+    },
+    "lightning_strike": {
+        "name": "Lightning Strike",
+        "type": "ATTACK",
+        "description": "A powerful lightning attack that can hit at range",
+        "accuracy": 80,
+        "damage": 12,
+        "range": 3,
+        "cooldown": 3,
+        "properties": {
+            "is_physical": 0
+        }
+    },
+    "quick_stab": {
+        "name": "Quick Stab",
+        "type": "ATTACK",
+        "description": "A fast attack that can be used frequently",
+        "accuracy": 90,
+        "damage": 3,
+        "range": 1,
+        "cooldown": 0,
+        "properties": {
+            "is_physical": 1
+        }
+    },
+    "charge": {
+        "name": "Charge",
+        "type": "COMPOUND",
+        "description": "Move forward one tile and attack in a single action. Movement works even if there are entities in between.",
+        "accuracy": 90,
+        "range": 2,
+        "cooldown": 2,
+        "properties": {
+            "position_change": 1,
+            "damage": 6,
+            "is_physical": 1,
+            "self_only": 0
+        }
+    },
+    "power_strike": {
+        "name": "Power Strike",
+        "type": "COMPOUND",
+        "description": "Buff strength and deal damage in a single strike",
+        "accuracy": 85,
+        "range": 1,
+        "cooldown": 3,
+        "properties": {
+            "damage": 5,
+            "is_physical": 1,
+            "mod_STRENGTH": 2,
+            "duration": 2,
+            "self_only": 0
+        }
+    },
+    "life_drain": {
+        "name": "Life Drain",
+        "type": "COMPOUND",
+        "description": "Deal damage to enemy and heal self",
+        "accuracy": 80,
+        "range": 1,
+        "cooldown": 3,
+        "properties": {
+            "damage": 6,
+            "is_physical": 0,
+            "heal_amount": 4
+        }
+    },
+    "stun_slash": {
+        "name": "Stun Slash",
+        "type": "COMPOUND",
+        "description": "Deal damage and reduce enemy speed",
+        "accuracy": 75,
+        "range": 1,
+        "cooldown": 2,
+        "properties": {
+            "damage": 4,
+            "is_physical": 1,
+            "mod_SPEED": -3,
+            "duration": 2
+        }
+    }
+} 

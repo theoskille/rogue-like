@@ -76,16 +76,16 @@ This document outlines the step-by-step implementation plan for our C++ rogue-li
 ## Phase 3: Combat System
 
 ### Task 3.1: Battlefield Implementation
-- [ ] Implement Battlefield class (src/game/combat/Battlefield.cpp/.h)
-- [ ] Create 8-tile linear strip representation
-- [ ] Implement position validation and movement rules
-- [ ] Test: Entities can be placed and moved on battlefield
+- [x] Implement Battlefield class (src/game/combat/Battlefield.cpp/.h)
+- [x] Create 8-tile linear strip representation
+- [x] Implement position validation and movement rules
+- [x] Test: Entities can be placed and moved on battlefield
 
-### Task 3.2: Move Implementation
-- [ ] Implement Move class (src/game/combat/Move.cpp/.h)
-- [ ] Define properties (accuracy, damage, range, etc.)
-- [ ] Create JSON schema for moves
-- [ ] Test: Load and execute basic moves
+### Task 3.2: Action Implementation
+- [x] Implement Action class (src/game/combat/Action.cpp/.h)
+- [x] Define properties (accuracy, damage, range, etc.)
+- [x] Create JSON schema for actions
+- [x] Test: Load and execute basic actions
 
 ### Task 3.3: Turn Manager
 - [ ] Implement TurnManager class (src/game/combat/TurnManager.cpp/.h)

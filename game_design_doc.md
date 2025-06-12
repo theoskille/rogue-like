@@ -25,12 +25,12 @@ Turn-based combat roguelike with tactical positioning on linear battlefield. Nav
 - **Movement restriction**: Cannot move past each other
 
 ### Turn Actions
-1. **Fight**: Use class-specific attacks
+1. **Fight**: Use class-specific actions
 2. **Move**: Advance (toward enemy) or Retreat (away)
 3. **Item**: Use consumables
 4. **Run**: Attempt escape
 
-### Attack/Move Properties
+### Action Properties
 - **Accuracy**: Hit chance percentage
 - **Damage**: Base damage value
 - **Range**: Required positioning to use
@@ -62,13 +62,13 @@ Turn-based combat roguelike with tactical positioning on linear battlefield. Nav
 ## Character Progression
 
 ### Classes
-- **Unique attack sets** per class
+- **Unique action sets** per class
 - **Unlock through gameplay**
 
 ### Leveling
 - **Gain levels**: Through combat/progression
 - **Skill points**: Earned on level up
-- **Skill trees**: Upgrade moves and abilities
+- **Skill trees**: Upgrade actions and abilities
 
 ## Controls
 - **WASD**: Menu navigation

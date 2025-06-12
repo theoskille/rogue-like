@@ -1,11 +1,12 @@
 #include "engine/core/Application.h"
-#include "engine/core/EventSystem.h"
-#include "engine/input/InputHandler.h"
+#include "engine/core/StateManager.h"
 #include "game/states/EntityTestState.h"
 #include "game/states/DataTestState.h"
 #include "game/states/StatsTestState.h"
 #include "game/states/PositionTestState.h"
 #include "game/states/UITestState.h"
+#include "game/states/BattlefieldTestState.h"
+#include "game/states/ActionTestState.h"
 #include <iostream>
 
 // Function to handle key press events
@@ -36,24 +37,23 @@ void OnKeyPressed(const Engine::Event& event) {
 
 int main() {
     // Create and initialize the application
-    Engine::Application app(800, 600, "Rogue-Like Game - UI Test");
-    
-    // Subscribe to events
-    Engine::EventSystem::GetInstance().Subscribe(Engine::EventType::KEY_PRESSED, OnKeyPressed);
+    Engine::Application app(1024, 768, "Rogue-Like Game - Action Test");
     
     if (!app.Initialize()) {
+        std::cerr << "Failed to initialize application!" << std::endl;
         return 1;
     }
     
-    // Clear any existing states and start with the UI Test state
-    while (!Engine::StateManager::GetInstance().IsEmpty()) {
-        Engine::StateManager::GetInstance().PopState();
+    // Clear any existing states (Application adds a DataTestState by default)
+    Engine::StateManager& stateManager = Engine::StateManager::GetInstance();
+    while (!stateManager.IsEmpty()) {
+        stateManager.PopState();
     }
     
-    // Start with the UI Test state
-    Engine::StateManager::GetInstance().PushState(std::make_unique<Game::UITestState>());
+    // Push the action test state
+    stateManager.PushState(std::make_unique<Game::ActionTestState>());
     
-    // Run the main game loop
+    // Run the application
     app.Run();
     
     // Clean up
