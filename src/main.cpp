@@ -7,6 +7,11 @@
 #include "game/states/UITestState.h"
 #include "game/states/BattlefieldTestState.h"
 #include "game/states/ActionTestState.h"
+#include "game/states/TurnManagerTestState.h"
+#include "game/states/StatusEffectsTestState.h"
+#include "game/states/CombatTestState.h"
+#include "game/states/RoomTestState.h"
+#include "game/states/DungeonTestState.h"
 #include <iostream>
 
 // Function to handle key press events
@@ -37,21 +42,24 @@ void OnKeyPressed(const Engine::Event& event) {
 
 int main() {
     // Create and initialize the application
-    Engine::Application app(1024, 768, "Rogue-Like Game - Action Test");
+    Engine::Application app(1024, 768, "Rogue-Like Game - Dungeon Generator Test");
     
     if (!app.Initialize()) {
         std::cerr << "Failed to initialize application!" << std::endl;
         return 1;
     }
     
-    // Clear any existing states (Application adds a DataTestState by default)
+    // Subscribe to key press events
+    Engine::EventSystem::GetInstance().Subscribe(Engine::EventType::KEY_PRESSED, OnKeyPressed);
+    
+    // Clear any existing states
     Engine::StateManager& stateManager = Engine::StateManager::GetInstance();
     while (!stateManager.IsEmpty()) {
         stateManager.PopState();
     }
     
-    // Push the action test state
-    stateManager.PushState(std::make_unique<Game::ActionTestState>());
+    // Push the dungeon test state
+    stateManager.PushState(std::make_unique<Game::DungeonTestState>());
     
     // Run the application
     app.Run();

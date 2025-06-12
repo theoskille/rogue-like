@@ -88,41 +88,41 @@ This document outlines the step-by-step implementation plan for our C++ rogue-li
 - [x] Test: Load and execute basic actions
 
 ### Task 3.3: Turn Manager
-- [ ] Implement TurnManager class (src/game/combat/TurnManager.cpp/.h)
-- [ ] Create speed-based turn order calculation
-- [ ] Implement turn processing logic
-- [ ] Test: Turn order is correctly determined by speed
+- [x] Implement TurnManager class (src/game/combat/TurnManager.cpp/.h)
+- [x] Create speed-based turn order calculation
+- [x] Implement turn processing logic
+- [x] Test: Turn order is correctly determined by speed
 
 ### Task 3.4: Combat System
-- [ ] Implement CombatSystem class (src/game/combat/CombatSystem.cpp/.h)
-- [ ] Create combat flow (start, process turns, end)
-- [ ] Integrate with Battlefield and TurnManager
-- [ ] Test: Complete a simple combat encounter
+- [x] Implement CombatSystem class (src/game/combat/CombatSystem.cpp/.h)
+- [x] Create combat flow (start, process turns, end)
+- [x] Integrate with Battlefield and TurnManager
+- [x] Test: Complete a simple combat encounter
 
 ### Task 3.5: Status Effects
-- [ ] Implement StatusEffects component (src/game/entities/components/StatusEffects.cpp/.h)
-- [ ] Create various effect types (poison, stun, etc.)
-- [ ] Implement duration and tick mechanics
-- [ ] Test: Apply and resolve different status effects
+- [x] Implement StatusEffects component (src/game/entities/components/StatusEffectsComponent.cpp/.h)
+- [x] Create various effect types (poison, stun, etc.)
+- [x] Implement duration and tick mechanics
+- [x] Test: Apply and resolve different status effects
 
 ## Phase 4: Dungeon & Room Generation
 
 ### Task 4.1: Room Implementation
-- [ ] Implement Room class (src/game/dungeon/Room.cpp/.h)
-- [ ] Define room connections and properties
-- [ ] Test: Create rooms and establish connections between them
+- [x] Implement Room class (src/game/dungeon/Room.cpp/.h)
+- [x] Define room connections and properties
+- [x] Test: Create rooms and establish connections between them
 
 ### Task 4.2: Encounter System
-- [ ] Implement Encounter base class (src/game/dungeon/encounters/Encounter.cpp/.h)
-- [ ] Create CombatEncounter class (src/game/dungeon/encounters/CombatEncounter.cpp/.h)
-- [ ] Implement TreasureEncounter class (src/game/dungeon/encounters/TreasureEncounter.cpp/.h)
-- [ ] Test: Rooms can trigger different encounter types
+- [x] Implement Encounter base class (src/game/dungeon/encounters/Encounter.cpp/.h)
+- [x] Create CombatEncounter class (src/game/dungeon/encounters/CombatEncounter.cpp/.h)
+- [x] Implement TreasureEncounter class (src/game/dungeon/encounters/TreasureEncounter.cpp/.h)
+- [x] Test: Rooms can trigger different encounter types
 
 ### Task 4.3: Dungeon Generator
-- [ ] Implement DungeonGenerator class (src/game/dungeon/DungeonGenerator.cpp/.h)
-- [ ] Create graph-based random room generation
-- [ ] Implement floor layouts with boss rooms
-- [ ] Test: Generate and validate a complete dungeon floor
+- [x] Implement DungeonGenerator class (src/game/dungeon/DungeonGenerator.cpp/.h)
+- [x] Create graph-based random room generation
+- [x] Implement floor layouts with boss rooms
+- [x] Test: Generate and validate a complete dungeon floor
 
 ## Phase 5: Game States & Screens
 
