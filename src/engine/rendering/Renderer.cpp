@@ -124,7 +124,7 @@ bool Renderer::IsButtonPressed(int x, int y, int width, int height) {
     return mouseInside && ::IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 }
 
-void Renderer::DrawBattlefield(const Battlefield& battlefield) {
+void Renderer::DrawBattlefield(const Battlefield& /* battlefield */) {
     // This is a placeholder since we haven't implemented Battlefield yet
     // Will be implemented later when we have the Battlefield class
     DrawRect(100, 300, 600, 100, LIGHTGRAY);

@@ -37,10 +37,10 @@ This document outlines the step-by-step implementation plan for our C++ rogue-li
 - [x] Test: Input events are generated on key presses
 
 ### Task 1.6: Core Engine - Renderer
-- [ ] Implement Renderer class (src/engine/rendering/Renderer.cpp/.h)
-- [ ] Create basic drawing primitives and text rendering
-- [ ] Implement render loop with BeginFrame/EndFrame
-- [ ] Test: Basic shapes and text can be rendered to the screen
+- [x] Implement Renderer class (src/engine/rendering/Renderer.cpp/.h)
+- [x] Create basic drawing primitives and text rendering
+- [x] Implement render loop with BeginFrame/EndFrame
+- [x] Test: Basic shapes and text can be rendered to the screen
 
 ## Phase 2: Basic Game Systems
 

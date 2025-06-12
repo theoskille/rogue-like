@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include "../input/InputHandler.h"
+#include "../rendering/Renderer.h"
 
 namespace Engine {
 
@@ -29,37 +30,43 @@ void MenuState::Update(float deltaTime) {
 }
 
 void MenuState::Render() {
-    // Draw title and instructions
-    ClearBackground(RAYWHITE);
+    Renderer& renderer = Renderer::GetInstance();
     
-    // Animated title
-    float scale = 1.0f + 0.1f * sin(animationTime * 2.0f);
+    // Clear the background
+    renderer.ClearBackground(RAYWHITE);
     
-    DrawText("ROGUE-LIKE GAME", 
-             GetScreenWidth() / 2 - MeasureText("ROGUE-LIKE GAME", 40) / 2, 
-             100, 
-             40, 
-             MAROON);
+    // Animated title - for now we just render it without animation
+    renderer.DrawTextCentered("ROGUE-LIKE GAME", 
+                             renderer.GetScreenWidth() / 2, 
+                             100, 
+                             40, 
+                             MAROON);
     
     // Draw menu options
-    DrawText("PRESS SPACE TO START GAME", 
-             GetScreenWidth() / 2 - MeasureText("PRESS SPACE TO START GAME", 20) / 2, 
-             300, 
-             20, 
-             BLACK);
-             
-    DrawText("WASD - MOVE", 
-             GetScreenWidth() / 2 - MeasureText("WASD - MOVE", 20) / 2, 
-             350, 
-             20, 
-             GRAY);
-             
+    renderer.DrawTextCentered("PRESS SPACE TO START GAME", 
+                             renderer.GetScreenWidth() / 2, 
+                             300, 
+                             20, 
+                             BLACK);
+                             
+    renderer.DrawTextCentered("WASD - MOVE", 
+                             renderer.GetScreenWidth() / 2, 
+                             350, 
+                             20, 
+                             GRAY);
+    
+    // Draw buttons
+    renderer.DrawButton(renderer.GetScreenWidth() / 2 - 100, 400, 200, 40, "START GAME", LIGHTGRAY, BLACK);
+    renderer.DrawButton(renderer.GetScreenWidth() / 2 - 100, 460, 200, 40, "OPTIONS", LIGHTGRAY, BLACK);
+    renderer.DrawButton(renderer.GetScreenWidth() / 2 - 100, 520, 200, 40, "QUIT", LIGHTGRAY, BLACK);
+    
+    // Display pause message if paused
     if (isPaused) {
-        DrawText("PAUSED", 
-                 GetScreenWidth() / 2 - MeasureText("PAUSED", 30) / 2, 
-                 250, 
-                 30, 
-                 RED);
+        renderer.DrawTextCentered("PAUSED", 
+                                 renderer.GetScreenWidth() / 2, 
+                                 250, 
+                                 30, 
+                                 RED);
     }
 }
 
@@ -76,8 +83,9 @@ void MenuState::Resume() {
 // GameplayState implementation
 void GameplayState::Enter() {
     std::cout << "Entering Gameplay State" << std::endl;
-    playerX = GetScreenWidth() / 2;
-    playerY = GetScreenHeight() / 2;
+    Renderer& renderer = Renderer::GetInstance();
+    playerX = renderer.GetScreenWidth() / 2;
+    playerY = renderer.GetScreenHeight() / 2;
     animationTime = 0.0f;
     isPaused = false;
 }
@@ -94,6 +102,7 @@ void GameplayState::Update(float deltaTime) {
     
     // Handle player movement using input actions
     InputHandler& input = InputHandler::GetInstance();
+    Renderer& renderer = Renderer::GetInstance();
     
     // Calculate movement speed
     float moveSpeed = 200.0f * deltaTime;
@@ -105,8 +114,8 @@ void GameplayState::Update(float deltaTime) {
     if (input.IsActionPressed(InputAction::MOVE_RIGHT)) playerX += moveSpeed;
     
     // Keep player within screen bounds
-    playerX = playerX < 25 ? 25 : (playerX > GetScreenWidth() - 25 ? GetScreenWidth() - 25 : playerX);
-    playerY = playerY < 25 ? 25 : (playerY > GetScreenHeight() - 25 ? GetScreenHeight() - 25 : playerY);
+    playerX = playerX < 25 ? 25 : (playerX > renderer.GetScreenWidth() - 25 ? renderer.GetScreenWidth() - 25 : playerX);
+    playerY = playerY < 25 ? 25 : (playerY > renderer.GetScreenHeight() - 25 ? renderer.GetScreenHeight() - 25 : playerY);
     
     // Check for cancel action to go back to menu
     if (input.IsActionJustPressed(InputAction::CANCEL)) {
@@ -125,37 +134,45 @@ void GameplayState::Update(float deltaTime) {
 }
 
 void GameplayState::Render() {
-    ClearBackground(BLACK);
+    Renderer& renderer = Renderer::GetInstance();
+    
+    // Clear the background
+    renderer.ClearBackground(BLACK);
     
     // Draw game title
-    DrawText("GAMEPLAY", 
-             GetScreenWidth() / 2 - MeasureText("GAMEPLAY", 40) / 2, 
-             30, 
-             40, 
-             WHITE);
+    renderer.DrawTextCentered("GAMEPLAY", 
+                             renderer.GetScreenWidth() / 2, 
+                             30, 
+                             40, 
+                             WHITE);
+    
+    // Draw placeholder battlefield (just draw directly without passing a pointer)
+    // We'll implement this properly when we have the Battlefield class
+    // renderer.DrawBattlefield(*(Battlefield*)nullptr);
     
     // Draw player (as a simple circle)
-    DrawCircle(playerX, playerY, 25, RED);
+    renderer.DrawCircle(playerX, playerY, 25, RED);
     
     // Draw instructions
-    DrawText("Move with WASD, ESC to return to Menu", 
-             GetScreenWidth() / 2 - MeasureText("Move with WASD, ESC to return to Menu", 20) / 2, 
-             GetScreenHeight() - 60, 
-             20, 
-             WHITE);
-             
-    DrawText("E to attack, Q to use item", 
-             GetScreenWidth() / 2 - MeasureText("E to attack, Q to use item", 20) / 2, 
-             GetScreenHeight() - 30, 
-             20, 
-             WHITE);
-             
+    renderer.DrawTextCentered("Move with WASD, ESC to return to Menu", 
+                             renderer.GetScreenWidth() / 2, 
+                             renderer.GetScreenHeight() - 60, 
+                             20, 
+                             WHITE);
+                             
+    renderer.DrawTextCentered("E to attack, Q to use item", 
+                             renderer.GetScreenWidth() / 2, 
+                             renderer.GetScreenHeight() - 30, 
+                             20, 
+                             WHITE);
+    
+    // Display pause message if paused
     if (isPaused) {
-        DrawText("PAUSED", 
-                 GetScreenWidth() / 2 - MeasureText("PAUSED", 30) / 2, 
-                 GetScreenHeight() / 2, 
-                 30, 
-                 RED);
+        renderer.DrawTextCentered("PAUSED", 
+                                 renderer.GetScreenWidth() / 2, 
+                                 renderer.GetScreenHeight() / 2, 
+                                 30, 
+                                 RED);
     }
 }
 

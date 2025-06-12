@@ -9,7 +9,8 @@ namespace Engine {
 Application* Application::instance = nullptr;
 
 Application::Application(int width, int height, const std::string& title)
-    : screenWidth(width), screenHeight(height), windowTitle(title), isRunning(false) {
+    : screenWidth(width), screenHeight(height), windowTitle(title), isRunning(false),
+      renderer(width, height, title) {
     
     // Set singleton instance
     if (instance == nullptr) {
@@ -27,12 +28,9 @@ Application::~Application() {
 }
 
 bool Application::Initialize() {
-    // Initialize Raylib window
-    InitWindow(screenWidth, screenHeight, windowTitle.c_str());
-    SetTargetFPS(60);
-    
-    if (!IsWindowReady()) {
-        std::cerr << "Failed to initialize Raylib window!" << std::endl;
+    // Initialize renderer
+    if (!renderer.Initialize()) {
+        std::cerr << "Failed to initialize renderer!" << std::endl;
         return false;
     }
     
@@ -62,12 +60,12 @@ void Application::Run() {
         stateManager.Update(gameTime.GetDeltaTime());
         
         // Render frame
-        BeginDrawing();
+        renderer.BeginFrame();
         
         // Render the current state
         stateManager.Render();
         
-        EndDrawing();
+        renderer.EndFrame();
         
         // Check if we should exit (no states left)
         if (stateManager.IsEmpty()) {
@@ -78,7 +76,7 @@ void Application::Run() {
 
 void Application::Shutdown() {
     isRunning = false;
-    CloseWindow();
+    renderer.Shutdown();
     std::cout << "Application shut down." << std::endl;
 }
 
