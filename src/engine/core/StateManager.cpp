@@ -28,29 +28,28 @@ StateManager::~StateManager() {
 }
 
 void StateManager::PushState(std::unique_ptr<GameState> state) {
+    // Pause the current state if it exists
     if (!states.empty()) {
-        // Pause the current state
         states.top()->Pause();
     }
     
-    // Add the new state and enter it
+    // Log state transition
     std::cout << "Pushing state: " << state->GetStateName() << std::endl;
-    state->Enter();
+    
+    // Push and enter the new state
     states.push(std::move(state));
+    states.top()->Enter();
 }
 
 void StateManager::PopState() {
-    if (states.empty()) {
-        std::cerr << "Warning: Trying to pop from an empty state stack!" << std::endl;
-        return;
+    // Exit the current state
+    if (!states.empty()) {
+        std::cout << "Popping state: " << states.top()->GetStateName() << std::endl;
+        states.top()->Exit();
+        states.pop();
     }
     
-    // Exit and remove the current state
-    std::cout << "Popping state: " << states.top()->GetStateName() << std::endl;
-    states.top()->Exit();
-    states.pop();
-    
-    // Resume the previous state if there is one
+    // Resume the previous state if it exists
     if (!states.empty()) {
         std::cout << "Resuming state: " << states.top()->GetStateName() << std::endl;
         states.top()->Resume();
@@ -58,39 +57,43 @@ void StateManager::PopState() {
 }
 
 void StateManager::ChangeState(std::unique_ptr<GameState> state) {
+    // Exit the current state if it exists
     if (!states.empty()) {
-        // Exit and remove the current state
         std::cout << "Changing from state: " << states.top()->GetStateName() << std::endl;
         states.top()->Exit();
         states.pop();
     }
     
-    // Add the new state and enter it
+    // Push and enter the new state
     std::cout << "Changing to state: " << state->GetStateName() << std::endl;
-    state->Enter();
     states.push(std::move(state));
+    states.top()->Enter();
 }
 
-void StateManager::Update(float deltaTime) {
+GameState* StateManager::GetCurrentState() {
     if (states.empty()) {
-        return;
+        return nullptr;
     }
     
-    // Update the current state
-    states.top()->Update(deltaTime);
-}
-
-void StateManager::Render() {
-    if (states.empty()) {
-        return;
-    }
-    
-    // Render the current state
-    states.top()->Render();
+    return states.top().get();
 }
 
 bool StateManager::IsEmpty() const {
     return states.empty();
+}
+
+void StateManager::Update(float deltaTime) {
+    // Update the current state if it exists
+    if (!states.empty()) {
+        states.top()->Update(deltaTime);
+    }
+}
+
+void StateManager::Render() {
+    // Render the current state if it exists
+    if (!states.empty()) {
+        states.top()->Render();
+    }
 }
 
 StateManager& StateManager::GetInstance() {

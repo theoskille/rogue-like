@@ -1,6 +1,11 @@
 #include "engine/core/Application.h"
 #include "engine/core/EventSystem.h"
 #include "engine/input/InputHandler.h"
+#include "game/states/EntityTestState.h"
+#include "game/states/DataTestState.h"
+#include "game/states/StatsTestState.h"
+#include "game/states/PositionTestState.h"
+#include "game/states/UITestState.h"
 #include <iostream>
 
 // Function to handle key press events
@@ -29,33 +34,24 @@ void OnKeyPressed(const Engine::Event& event) {
     std::cout << "Key pressed: " << keyCode << " (Action: " << actionName << ")" << std::endl;
 }
 
-// Function to handle window resize events
-void OnWindowResize(const Engine::Event& event) {
-    int width = event.GetIntData("width");
-    int height = event.GetIntData("height");
-    std::cout << "Window resized to: " << width << "x" << height << std::endl;
-}
-
 int main() {
-    // Create the event system
-    Engine::EventSystem eventSystem;
+    // Create and initialize the application
+    Engine::Application app(800, 600, "Rogue-Like Game - UI Test");
     
     // Subscribe to events
-    eventSystem.Subscribe(Engine::EventType::KEY_PRESSED, OnKeyPressed);
-    eventSystem.Subscribe(Engine::EventType::WINDOW_RESIZE, OnWindowResize);
-    
-    // Test publishing events
-    Engine::Event resizeEvent(Engine::EventType::WINDOW_RESIZE);
-    resizeEvent.SetData("width", 1024);
-    resizeEvent.SetData("height", 768);
-    eventSystem.Publish(resizeEvent);
-    
-    // Create and initialize the application
-    Engine::Application app(800, 600, "Rogue-Like Game");
+    Engine::EventSystem::GetInstance().Subscribe(Engine::EventType::KEY_PRESSED, OnKeyPressed);
     
     if (!app.Initialize()) {
         return 1;
     }
+    
+    // Clear any existing states and start with the UI Test state
+    while (!Engine::StateManager::GetInstance().IsEmpty()) {
+        Engine::StateManager::GetInstance().PopState();
+    }
+    
+    // Start with the UI Test state
+    Engine::StateManager::GetInstance().PushState(std::make_unique<Game::UITestState>());
     
     // Run the main game loop
     app.Run();

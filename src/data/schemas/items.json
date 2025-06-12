@@ -1,0 +1,53 @@
+{
+    "rusty_sword": {
+        "name": "Rusty Sword",
+        "description": "An old sword with rust spots. Still sharp enough to cut.",
+        "value": 5,
+        "weight": 3,
+        "equippable": true,
+        "equipSlot": "weapon",
+        "bonuses": {
+            "str": 1
+        }
+    },
+    "leather_armor": {
+        "name": "Leather Armor",
+        "description": "Basic armor made of tanned hide. Offers minimal protection.",
+        "value": 10,
+        "weight": 5,
+        "equippable": true,
+        "equipSlot": "chest",
+        "bonuses": {
+            "def": 1
+        }
+    },
+    "health_potion": {
+        "name": "Health Potion",
+        "description": "A small vial containing red liquid. Restores 10 health when consumed.",
+        "value": 15,
+        "weight": 1,
+        "equippable": false
+    },
+    "iron_helmet": {
+        "name": "Iron Helmet",
+        "description": "A sturdy helmet that protects the head.",
+        "value": 20,
+        "weight": 4,
+        "equippable": true,
+        "equipSlot": "head",
+        "bonuses": {
+            "def": 2
+        }
+    },
+    "amulet_of_strength": {
+        "name": "Amulet of Strength",
+        "description": "A magical amulet that enhances the wearer's physical power.",
+        "value": 50,
+        "weight": 1,
+        "equippable": true,
+        "equipSlot": "accessory",
+        "bonuses": {
+            "str": 3
+        }
+    }
+} 

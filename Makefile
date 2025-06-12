@@ -1,11 +1,12 @@
 # Detect Homebrew installation
 BREW_PREFIX := $(shell brew --prefix 2>/dev/null || echo "/usr/local")
 RAYLIB_PATH := $(BREW_PREFIX)
+JSON_PATH := $(BREW_PREFIX)
 
 # Compiler settings
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
-INCLUDES = -I$(RAYLIB_PATH)/include -Isrc/ -Iinclude/
+INCLUDES = -I$(RAYLIB_PATH)/include -I$(JSON_PATH)/include -Isrc/ -Iinclude/
 LIBS = -L$(RAYLIB_PATH)/lib -lraylib
 
 # Platform-specific settings

@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "/opt/homebrew/include/raylib.h"
 #include <iostream>
-#include "TestStates.h"
+#include "../../game/states/DataTestState.h"
 
 namespace Engine {
 
@@ -34,8 +34,8 @@ bool Application::Initialize() {
         return false;
     }
     
-    // Start with the menu state
-    stateManager.PushState(std::make_unique<MenuState>());
+    // Start with the data test state
+    stateManager.PushState(std::make_unique<Game::DataTestState>());
     
     isRunning = true;
     std::cout << "Application initialized successfully." << std::endl;

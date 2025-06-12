@@ -45,33 +45,33 @@ This document outlines the step-by-step implementation plan for our C++ rogue-li
 ## Phase 2: Basic Game Systems
 
 ### Task 2.1: Entity Component System
-- [ ] Implement Entity base class (src/game/entities/Entity.cpp/.h)
-- [ ] Create Component base class
-- [ ] Implement AddComponent, GetComponent, HasComponent methods
-- [ ] Test: Create an entity with multiple components and verify operations
+- [x] Implement Entity base class (src/game/entities/Entity.cpp/.h)
+- [x] Create Component base class
+- [x] Implement AddComponent, GetComponent, HasComponent methods
+- [x] Test: Create an entity with multiple components and verify operations
 
 ### Task 2.2: Data Loading
-- [ ] Implement DataLoader class (src/data/DataLoader.cpp/.h)
-- [ ] Create JSON parsing utilities
-- [ ] Set up initial schema structure
-- [ ] Test: Load sample JSON data into game structures
+- [x] Implement DataLoader class (src/data/DataLoader.cpp/.h)
+- [x] Create JSON parsing utilities
+- [x] Set up initial schema structure
+- [x] Test: Load sample JSON data into game structures
 
 ### Task 2.3: Stats Component
-- [ ] Implement Stats component (src/game/entities/components/Stats.cpp/.h)
-- [ ] Define core stats (STR, INT, SPD, DEX, CON, DEF, LCK)
-- [ ] Create methods for stat calculations and modifications
-- [ ] Test: Create an entity with stats and modify them
+- [x] Implement Stats component (src/game/entities/components/StatsComponent.cpp/.h)
+- [x] Define core stats (STR, INT, SPD, DEX, CON, DEF, LCK)
+- [x] Create methods for stat calculations and modifications
+- [x] Test: Create an entity with stats and modify them
 
 ### Task 2.4: Position Component
-- [ ] Implement Position component (src/game/entities/components/Position.cpp/.h)
-- [ ] Create position tracking for the battlefield
-- [ ] Test: Entity can be positioned and moved on a grid
+- [x] Implement Position component (src/game/entities/components/PositionComponent.cpp/.h)
+- [x] Create position tracking for the battlefield
+- [x] Test: Entity can be positioned and moved on a grid
 
 ### Task 2.5: Basic UI Framework
-- [ ] Implement UIManager class (src/engine/rendering/UI/UIManager.cpp/.h)
-- [ ] Create Widget base class (src/engine/rendering/UI/Widget.cpp/.h)
-- [ ] Implement Menu class (src/engine/rendering/UI/Menu.cpp/.h)
-- [ ] Test: Create and navigate a simple menu
+- [x] Implement UIManager class (src/engine/rendering/UI/UIManager.cpp/.h)
+- [x] Create Widget base class (src/engine/rendering/UI/Widget.cpp/.h)
+- [x] Implement Menu class (src/engine/rendering/UI/Menu.cpp/.h)
+- [x] Test: Create and navigate a simple menu
 
 ## Phase 3: Combat System
 
